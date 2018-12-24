@@ -1,0 +1,25 @@
+{
+    "name": "non0/pay",
+    "description": "非零互动娱乐（中国）支付系统聚合SDK",
+    "homepage": "http://www.non0.cn",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yanlongli"
+        }
+    ],
+    "require": {
+        "ext-iconv":"*",
+        "ext-simplexml":"*",
+        "ext-openssl":"*",
+        "ext-json":"*",
+        "ext-curl":"*",
+        "psr/log": "*",
+        "monolog/monolog": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Non0\\Pay\\": "src/"
+        }
+    }
+}

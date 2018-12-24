@@ -1,0 +1,5 @@
+.idea/
+vendor/
+*.log
+/demo/config-local.php
+/composer.lock
