@@ -32,4 +32,24 @@ class Order extends BaseService
 
         return parent::request('/pay/unifiedOrder.pay', $data);
     }
+
+    public static function query($out_trade_no)
+    {
+        $data = [];
+        $data['mch_id'] = Kernel::getApi()->merchantNumber;//商户号
+        $data['nonce_str'] = md5(uniqid());//随机字符串
+        $data['out_trade_no'] = $out_trade_no;
+        return self::request('/pay/query_order.pay');
+    }
+
+    public static function refund($out_trade_no, $out_refund_no, $refund_fee)
+    {
+        $data = [];
+        $data['mch_id'] = Kernel::getApi()->merchantNumber;//商户号
+        $data['nonce_str'] = md5(uniqid());//随机字符串
+        $data['out_refund_no'] = $out_refund_no;//退款单号
+        $data['out_trade_no'] = $out_trade_no;//交易单号
+        $data['refund_fee'] = $refund_fee;//退款金额
+        return self::request('/pay/refund.pay');
+    }
 }
