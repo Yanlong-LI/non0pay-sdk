@@ -22,9 +22,10 @@ class Order extends BaseService
      * @param string $limit_pay 限定支付方式
      * @param string $trade_type 支付类型
      * @param string $spbill_create_ip 客户端ip
+     * @param string $attach 自定义参数
      * @return mixed
      */
-    public static function create($title, $detail, $out_trade_no, $total_fee, $limit_pay = '', $trade_type = '', $spbill_create_ip = '127.0.0.1')
+    public static function create($title, $detail, $out_trade_no, $total_fee, $limit_pay = '', $trade_type = '', $spbill_create_ip = '127.0.0.1', $attach = '')
     {
         $data = [];
 
@@ -39,6 +40,8 @@ class Order extends BaseService
         $data['trade_type'] = $trade_type;//选择交易方式
         $data['spbill_create_ip'] = $spbill_create_ip;//客户IP
         $data['notify_url'] = Kernel::getConfig('callback');//支付成功回调地址
+        if (!empty($attach) && is_array($attach))
+            $data['attach'] = json_encode($attach);
 
 
         return parent::request('/pay/unifiedOrder.pay', $data);
