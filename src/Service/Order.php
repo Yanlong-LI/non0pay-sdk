@@ -13,7 +13,18 @@ use Non0\Pay\Kernel;
 
 class Order extends BaseService
 {
-    public static function create($title, $detail, $out_trade_no, $total_fee, $limit_pay, $trade_type, $spbill_create_ip)
+    /**
+     * 创建订单
+     * @param string $title 商品标题
+     * @param string $detail 商品描述
+     * @param string $out_trade_no 商户订单号
+     * @param int $total_fee 交易金额
+     * @param string $limit_pay 限定支付方式
+     * @param string $trade_type 支付类型
+     * @param string $spbill_create_ip 客户端ip
+     * @return mixed
+     */
+    public static function create($title, $detail, $out_trade_no, $total_fee, $limit_pay = '', $trade_type = '', $spbill_create_ip = '127.0.0.1')
     {
         $data = [];
 
@@ -21,7 +32,7 @@ class Order extends BaseService
 //        $data['organization_number'] = Kernel::getApi()->organizationNumber;//机构号
         $data['nonce_str'] = md5(uniqid());//随机字符串
         $data['body'] = $title;//订单标题
-//        $data['detail'] = $detail;//订单描述
+        $data['detail'] = $detail;//订单描述
         $data['out_trade_no'] = $out_trade_no;//商户订单号
         $data['total_fee'] = $total_fee;//交易金额
         $data['limit_pay'] = $limit_pay;//选择支付方式
@@ -33,6 +44,11 @@ class Order extends BaseService
         return parent::request('/pay/unifiedOrder.pay', $data);
     }
 
+    /**
+     * 查询订单信息
+     * @param  string $out_trade_no 订单号
+     * @return mixed
+     */
     public static function query($out_trade_no)
     {
         $data = [];
@@ -42,6 +58,13 @@ class Order extends BaseService
         return self::request('/pay/query_order.pay');
     }
 
+    /**
+     * 退款申请
+     * @param $out_trade_no string 商户订单号
+     * @param $out_refund_no string 商户退款订单号
+     * @param $refund_fee int 退款金额
+     * @return mixed
+     */
     public static function refund($out_trade_no, $out_refund_no, $refund_fee)
     {
         $data = [];
