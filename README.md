@@ -12,7 +12,7 @@
 
 ##使用教程
 ```shel
-	composer require non0/pay
+	composer require non0/pay-sdk
 ```
 #### 如果你的项目没有使用composer
 
@@ -56,5 +56,8 @@
 
 ## 更新日志
 ```text
-
+2019年1月24日
+提交到composer包
+修改包名称
+发布0.0.3版本
 ```
