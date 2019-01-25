@@ -124,7 +124,7 @@ class Api
      * @param String $type
      * @return bool
      */
-    public function sign2($data, String $type = self::SIGN_TYPE_RSA2)
+    public function sign2($data, $type = self::SIGN_TYPE_RSA2)
     {
         switch ($type) {
             case self::SIGN_TYPE_RSA2:
@@ -142,7 +142,7 @@ class Api
      * @param string $type
      * @return bool
      */
-    public function verify($data, String $sign, String $type = self::SIGN_TYPE_RSA2)
+    public function verify($data, $sign, $type = self::SIGN_TYPE_RSA2)
     {
         switch ($type) {
             case self::SIGN_TYPE_RSA2:

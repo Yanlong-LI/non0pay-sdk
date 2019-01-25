@@ -46,10 +46,10 @@ class BaseService
 
         //验证数据及签名
 
-        $result = json_decode($result,true);
-        if($result){
-            $sign = $result['sign']??null;
-            $result['verify'] = Kernel::getApi()->verify($result,$sign);
+        $result = json_decode($result, true);
+        if ($result) {
+            $sign = (isset($result['sign']) && $result['sign']) ? $result['sign'] : null;
+            $result['verify'] = Kernel::getApi()->verify($result, $sign);
         }
 
         //json转数组
